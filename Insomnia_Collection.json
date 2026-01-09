@@ -1,0 +1,465 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-01-08T22:50:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "wrk_behoh",
+      "parentId": null,
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "name": "API REST Eventos - Behoh",
+      "description": "API de gestão de eventos, usuários e inscrições",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_base",
+      "parentId": "wrk_behoh",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:8080",
+        "usuario_id": "1",
+        "evento_id": "1",
+        "reserva_id": "1"
+      },
+      "_type": "environment"
+    },
+    {
+      "_id": "fld_usuarios",
+      "parentId": "wrk_behoh",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "name": "Usuários",
+      "description": "Endpoints de gestão de usuários",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_criar_usuario",
+      "parentId": "fld_usuarios",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/usuarios",
+      "name": "Criar Usuário",
+      "description": "Cria um novo usuário no sistema",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"João Silva\",\n  \"email\": \"joao.silva@email.com\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_criar_usuario2",
+      "parentId": "fld_usuarios",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/usuarios",
+      "name": "Criar Usuário (Maria)",
+      "description": "Cria outro usuário para testes",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Maria Santos\",\n  \"email\": \"maria.santos@email.com\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_criar_usuario3",
+      "parentId": "fld_usuarios",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/usuarios",
+      "name": "Criar Usuário (Pedro)",
+      "description": "Cria terceiro usuário para testes",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Pedro Costa\",\n  \"email\": \"pedro.costa@email.com\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_listar_usuarios",
+      "parentId": "fld_usuarios",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/usuarios",
+      "name": "Listar Todos os Usuários",
+      "description": "Lista todos os usuários cadastrados",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_buscar_usuario",
+      "parentId": "fld_usuarios",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/usuarios/{{ _.usuario_id }}",
+      "name": "Buscar Usuário por ID",
+      "description": "Busca um usuário específico pelo ID",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_deletar_usuario",
+      "parentId": "fld_usuarios",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/usuarios/{{ _.usuario_id }}",
+      "name": "Deletar Usuário",
+      "description": "Remove um usuário do sistema",
+      "method": "DELETE",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_eventos",
+      "parentId": "wrk_behoh",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "name": "Eventos",
+      "description": "Endpoints de gestão de eventos",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_criar_evento",
+      "parentId": "fld_eventos",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/eventos",
+      "name": "Criar Evento",
+      "description": "Cria um novo evento",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Workshop de Spring Boot\",\n  \"descricao\": \"Aprenda Spring Boot do zero ao avançado\",\n  \"vagas\": 50,\n  \"dataInicio\": \"2026-02-15T10:00:00\",\n  \"dataFim\": \"2026-02-15T18:00:00\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_criar_evento2",
+      "parentId": "fld_eventos",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/eventos",
+      "name": "Criar Evento (DevOps)",
+      "description": "Cria evento com poucas vagas para testar reservas",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Meetup de DevOps\",\n  \"descricao\": \"Discussão sobre práticas de DevOps modernas\",\n  \"vagas\": 2,\n  \"dataInicio\": \"2026-03-10T19:00:00\",\n  \"dataFim\": \"2026-03-10T21:00:00\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_criar_evento3",
+      "parentId": "fld_eventos",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/eventos",
+      "name": "Criar Evento (Microservices)",
+      "description": "Cria outro evento para testes",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Palestra sobre Microservices\",\n  \"descricao\": \"Arquitetura de microservices na prática\",\n  \"vagas\": 100,\n  \"dataInicio\": \"2026-04-20T14:00:00\",\n  \"dataFim\": \"2026-04-20T17:00:00\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_listar_eventos",
+      "parentId": "fld_eventos",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/eventos",
+      "name": "Listar Todos os Eventos",
+      "description": "Lista todos os eventos cadastrados",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_buscar_evento",
+      "parentId": "fld_eventos",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/eventos/{{ _.evento_id }}",
+      "name": "Buscar Evento por ID",
+      "description": "Busca um evento específico pelo ID",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_atualizar_evento",
+      "parentId": "fld_eventos",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/eventos/{{ _.evento_id }}",
+      "name": "Atualizar Evento",
+      "description": "Atualiza os dados de um evento",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Workshop de Spring Boot - Edição Especial\",\n  \"descricao\": \"Aprenda Spring Boot do zero ao avançado - Com certificado\",\n  \"vagas\": 60,\n  \"dataInicio\": \"2026-02-15T10:00:00\",\n  \"dataFim\": \"2026-02-15T18:00:00\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_deletar_evento",
+      "parentId": "fld_eventos",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/eventos/{{ _.evento_id }}",
+      "name": "Deletar Evento",
+      "description": "Remove um evento do sistema",
+      "method": "DELETE",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_inscricoes",
+      "parentId": "wrk_behoh",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "name": "Inscrições",
+      "description": "Endpoints de gestão de inscrições",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_criar_inscricao",
+      "parentId": "fld_inscricoes",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/inscricoes",
+      "name": "Criar Inscrição",
+      "description": "Inscreve um usuário em um evento",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"usuarioId\": 1,\n  \"eventoId\": 1\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_criar_inscricao2",
+      "parentId": "fld_inscricoes",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/inscricoes",
+      "name": "Criar Inscrição (Usuário 2)",
+      "description": "Inscreve segundo usuário",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"usuarioId\": 2,\n  \"eventoId\": 1\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_criar_inscricao3",
+      "parentId": "fld_inscricoes",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/inscricoes",
+      "name": "Criar Inscrição (Usuário 3)",
+      "description": "Inscreve terceiro usuário - pode criar reserva se evento cheio",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"usuarioId\": 3,\n  \"eventoId\": 1\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_listar_inscricoes",
+      "parentId": "fld_inscricoes",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/inscricoes",
+      "name": "Listar Todas as Inscrições",
+      "description": "Lista todas as inscrições do sistema",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_listar_inscricoes_usuario",
+      "parentId": "fld_inscricoes",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/inscricoes/usuario/{{ _.usuario_id }}",
+      "name": "Listar Inscrições por Usuário",
+      "description": "Lista todas as inscrições de um usuário específico",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_listar_inscricoes_evento",
+      "parentId": "fld_inscricoes",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/inscricoes/evento/{{ _.evento_id }}",
+      "name": "Listar Inscrições por Evento",
+      "description": "Lista todas as inscrições de um evento específico",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_cancelar_inscricao",
+      "parentId": "fld_inscricoes",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/inscricoes/1",
+      "name": "Cancelar Inscrição",
+      "description": "Cancela uma inscrição (não permitido após entrada registrada)",
+      "method": "DELETE",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_reservas",
+      "parentId": "wrk_behoh",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "name": "Reservas",
+      "description": "Endpoints de gestão de reservas (lista de espera)",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_criar_reserva",
+      "parentId": "fld_reservas",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/reservas",
+      "name": "Criar Reserva",
+      "description": "Cria uma reserva para um evento (quando não há vagas disponíveis)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"usuarioId\": 3,\n  \"eventoId\": 2\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_listar_reservas",
+      "parentId": "fld_reservas",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/reservas",
+      "name": "Listar Todas as Reservas",
+      "description": "Lista todas as reservas do sistema",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_listar_reservas_usuario",
+      "parentId": "fld_reservas",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/reservas/usuario/{{ _.usuario_id }}",
+      "name": "Listar Reservas por Usuário",
+      "description": "Lista todas as reservas de um usuário específico",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_listar_reservas_evento",
+      "parentId": "fld_reservas",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/reservas/evento/{{ _.evento_id }}/ativas",
+      "name": "Listar Reservas Ativas por Evento",
+      "description": "Lista todas as reservas ativas de um evento específico (ordenadas por ordem de chegada)",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_cancelar_reserva",
+      "parentId": "fld_reservas",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/reservas/{{ _.reserva_id }}",
+      "name": "Cancelar Reserva",
+      "description": "Cancela uma reserva da lista de espera",
+      "method": "DELETE",
+      "_type": "request"
+    },
+    {
+      "_id": "req_converter_reserva",
+      "parentId": "fld_reservas",
+      "modified": 1704754200000,
+      "created": 1704754200000,
+      "url": "{{ _.base_url }}/api/reservas/{{ _.reserva_id }}/converter",
+      "name": "Converter Reserva em Inscrição",
+      "description": "Converte manualmente uma reserva em inscrição (quando há vaga disponível)",
+      "method": "POST",
+      "_type": "request"
+    }
+  ]
+}
+

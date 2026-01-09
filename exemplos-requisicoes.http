@@ -1,0 +1,205 @@
+### API REST de Eventos - Exemplos de Requisições
+### URL Base: http://localhost:8080
+
+################################################################################
+# USUÁRIOS
+################################################################################
+
+### Listar todos os usuários
+GET http://localhost:8080/api/usuarios
+Accept: application/json
+
+### Buscar usuário por ID
+GET http://localhost:8080/api/usuarios/1
+Accept: application/json
+
+### Criar novo usuário
+POST http://localhost:8080/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "email": "joao.silva@email.com"
+}
+
+### Criar outro usuário
+POST http://localhost:8080/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Maria Santos",
+  "email": "maria.santos@email.com"
+}
+
+### Criar mais um usuário
+POST http://localhost:8080/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Pedro Costa",
+  "email": "pedro.costa@email.com"
+}
+
+### Deletar usuário
+DELETE http://localhost:8080/api/usuarios/1
+
+################################################################################
+# EVENTOS
+################################################################################
+
+### Listar todos os eventos
+GET http://localhost:8080/api/eventos
+Accept: application/json
+
+### Buscar evento por ID
+GET http://localhost:8080/api/eventos/1
+Accept: application/json
+
+### Criar novo evento
+POST http://localhost:8080/api/eventos
+Content-Type: application/json
+
+{
+  "nome": "Workshop de Java",
+  "descricao": "Aprenda Spring Boot do zero",
+  "vagas": 20,
+  "dataInicio": "2026-02-15T14:00:00",
+  "dataFim": "2026-02-15T18:00:00"
+}
+
+### Criar outro evento
+POST http://localhost:8080/api/eventos
+Content-Type: application/json
+
+{
+  "nome": "Meetup de DevOps",
+  "descricao": "Discussão sobre práticas de DevOps",
+  "vagas": 30,
+  "dataInicio": "2026-03-10T19:00:00",
+  "dataFim": "2026-03-10T21:00:00"
+}
+
+### Criar mais um evento
+POST http://localhost:8080/api/eventos
+Content-Type: application/json
+
+{
+  "nome": "Palestra sobre Microservices",
+  "descricao": "Arquitetura de microservices na prática",
+  "vagas": 50,
+  "dataInicio": "2026-04-20T10:00:00",
+  "dataFim": "2026-04-20T12:00:00"
+}
+
+### Atualizar evento
+PUT http://localhost:8080/api/eventos/1
+Content-Type: application/json
+
+{
+  "nome": "Workshop de Java - Edição Especial",
+  "descricao": "Aprenda Spring Boot do zero - Edição especial com certificado",
+  "vagas": 25,
+  "dataInicio": "2026-02-15T14:00:00",
+  "dataFim": "2026-02-15T18:00:00"
+}
+
+### Deletar evento
+DELETE http://localhost:8080/api/eventos/1
+
+################################################################################
+# INSCRIÇÕES
+################################################################################
+
+### Listar todas as inscrições
+GET http://localhost:8080/api/inscricoes
+Accept: application/json
+
+### Listar inscrições por usuário
+GET http://localhost:8080/api/inscricoes/usuario/1
+Accept: application/json
+
+### Listar inscrições por evento
+GET http://localhost:8080/api/inscricoes/evento/1
+Accept: application/json
+
+### Criar nova inscrição (inscrever usuário 1 no evento 1)
+POST http://localhost:8080/api/inscricoes
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "eventoId": 1
+}
+
+### Criar outra inscrição (inscrever usuário 2 no evento 1)
+POST http://localhost:8080/api/inscricoes
+Content-Type: application/json
+
+{
+  "usuarioId": 2,
+  "eventoId": 1
+}
+
+### Criar mais uma inscrição (inscrever usuário 1 no evento 2)
+POST http://localhost:8080/api/inscricoes
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "eventoId": 2
+}
+
+### Cancelar inscrição
+DELETE http://localhost:8080/api/inscricoes/1
+
+################################################################################
+# CENÁRIO DE TESTE COMPLETO
+################################################################################
+
+### 1. Criar usuários
+POST http://localhost:8080/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Ana Clara",
+  "email": "ana.clara@email.com"
+}
+
+###
+POST http://localhost:8080/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Carlos Eduardo",
+  "email": "carlos.eduardo@email.com"
+}
+
+### 2. Criar eventos
+POST http://localhost:8080/api/eventos
+Content-Type: application/json
+
+{
+  "nome": "Hackathon 2026",
+  "descricao": "Maratona de programação de 24 horas",
+  "vagas": 100,
+  "dataInicio": "2026-05-15T08:00:00",
+  "dataFim": "2026-05-16T08:00:00"
+}
+
+### 3. Inscrever usuários
+POST http://localhost:8080/api/inscricoes
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "eventoId": 1
+}
+
+### 4. Verificar inscrições do evento
+GET http://localhost:8080/api/inscricoes/evento/1
+Accept: application/json
+
+### 5. Verificar inscrições do usuário
+GET http://localhost:8080/api/inscricoes/usuario/1
+Accept: application/json
+

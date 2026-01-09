@@ -1,0 +1,40 @@
+HELP.md
+*.log
+### PostgreSQL ###
+
+.DS_Store
+### Mac ###
+
+.vscode/
+### VS Code ###
+
+!**/src/test/**/build/
+!**/src/main/**/build/
+build/
+/.nb-gradle/
+/nbdist/
+/dist/
+/nbbuild/
+/nbproject/private/
+### NetBeans ###
+
+*.ipr
+*.iml
+*.iws
+.idea
+### IntelliJ IDEA ###
+
+.sts4-cache
+.springBeans
+.settings
+.project
+.factorypath
+.classpath
+.apt_generated
+### STS ###
+
+!**/src/test/**/target/
+!**/src/main/**/target/
+!.mvn/wrapper/maven-wrapper.jar
+target/
+

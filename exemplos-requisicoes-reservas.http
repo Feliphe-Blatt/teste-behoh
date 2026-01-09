@@ -1,0 +1,323 @@
+### ========================================
+### SISTEMA DE RESERVAS - Exemplos de Requisições
+### ========================================
+
+### 1. LISTAR TODAS AS RESERVAS
+GET http://localhost:8080/api/reservas
+Accept: application/json
+
+###
+
+### 2. LISTAR RESERVAS POR USUÁRIO
+GET http://localhost:8080/api/reservas/usuario/1
+Accept: application/json
+
+###
+
+### 3. LISTAR RESERVAS ATIVAS POR EVENTO
+GET http://localhost:8080/api/reservas/evento/1/ativas
+Accept: application/json
+
+###
+
+### 4. CRIAR RESERVA MANUALMENTE
+POST http://localhost:8080/api/reservas
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "eventoId": 1
+}
+
+###
+
+### 5. CANCELAR RESERVA
+DELETE http://localhost:8080/api/reservas/1
+
+###
+
+### 6. CONVERTER RESERVA EM INSCRIÇÃO
+POST http://localhost:8080/api/reservas/1/converter
+Content-Type: application/json
+
+###
+
+### ========================================
+### CENÁRIO COMPLETO: Evento Lotado com Reservas
+### ========================================
+
+### PASSO 1: Criar um usuário
+POST http://localhost:8080/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Maria Santos",
+  "email": "maria.santos@email.com"
+}
+
+###
+
+### PASSO 2: Criar um evento com poucas vagas
+POST http://localhost:8080/api/eventos
+Content-Type: application/json
+
+{
+  "nome": "Workshop React Avançado",
+  "descricao": "Aprenda React hooks e performance",
+  "vagas": 2,
+  "dataInicio": "2026-02-20T14:00:00",
+  "dataFim": "2026-02-20T18:00:00"
+}
+
+###
+
+### PASSO 3: Criar outro usuário
+POST http://localhost:8080/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Pedro Oliveira",
+  "email": "pedro.oliveira@email.com"
+}
+
+###
+
+### PASSO 4: Inscrever primeiro usuário (sucesso)
+POST http://localhost:8080/api/inscricoes
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "eventoId": 1
+}
+
+###
+
+### PASSO 5: Inscrever segundo usuário (sucesso)
+POST http://localhost:8080/api/inscricoes
+Content-Type: application/json
+
+{
+  "usuarioId": 2,
+  "eventoId": 1
+}
+
+###
+
+### PASSO 6: Criar terceiro usuário
+POST http://localhost:8080/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Ana Costa",
+  "email": "ana.costa@email.com"
+}
+
+###
+
+### PASSO 7: Tentar inscrever terceiro usuário (criará RESERVA automaticamente)
+POST http://localhost:8080/api/inscricoes
+Content-Type: application/json
+
+{
+  "usuarioId": 3,
+  "eventoId": 1
+}
+
+# Resposta esperada: ReservaResponseDTO (201 Created)
+
+###
+
+### PASSO 8: Verificar reservas ativas do evento
+GET http://localhost:8080/api/reservas/evento/1/ativas
+Accept: application/json
+
+###
+
+### PASSO 9: Criar quarto usuário
+POST http://localhost:8080/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Carlos Mendes",
+  "email": "carlos.mendes@email.com"
+}
+
+###
+
+### PASSO 10: Criar outra reserva (quarto usuário)
+POST http://localhost:8080/api/inscricoes
+Content-Type: application/json
+
+{
+  "usuarioId": 4,
+  "eventoId": 1
+}
+
+###
+
+### PASSO 11: Verificar todas as reservas
+GET http://localhost:8080/api/reservas
+Accept: application/json
+
+###
+
+### PASSO 12: Listar inscrições do evento (deve ter 2)
+GET http://localhost:8080/api/inscricoes/evento/1
+Accept: application/json
+
+###
+
+### PASSO 13: Cancelar uma inscrição (converterá automaticamente primeira reserva)
+# Pegue o ID de uma inscrição da resposta anterior
+DELETE http://localhost:8080/api/inscricoes/1
+
+###
+
+### PASSO 14: Verificar que reserva foi convertida automaticamente
+GET http://localhost:8080/api/inscricoes/evento/1
+Accept: application/json
+
+# Deve mostrar 2 inscrições (uma nova do usuário que estava em reserva)
+
+###
+
+### PASSO 15: Verificar reservas restantes
+GET http://localhost:8080/api/reservas/evento/1/ativas
+Accept: application/json
+
+# Deve mostrar apenas 1 reserva agora
+
+###
+
+### ========================================
+### CENÁRIO: Conversão Manual de Reserva
+### ========================================
+
+### PASSO 1: Ver minhas reservas (usuário 4)
+GET http://localhost:8080/api/reservas/usuario/4
+Accept: application/json
+
+###
+
+### PASSO 2: Verificar se evento tem vagas
+GET http://localhost:8080/api/eventos/1
+Accept: application/json
+
+###
+
+### PASSO 3: Se tiver vagas, converter reserva manualmente
+# Use o ID da reserva obtido no PASSO 1
+POST http://localhost:8080/api/reservas/2/converter
+Content-Type: application/json
+
+###
+
+### PASSO 4: Verificar que agora tenho inscrição
+GET http://localhost:8080/api/inscricoes/usuario/4
+Accept: application/json
+
+###
+
+### ========================================
+### CENÁRIO: Cancelar Reserva Manualmente
+### ========================================
+
+### PASSO 1: Ver minhas reservas
+GET http://localhost:8080/api/reservas/usuario/3
+Accept: application/json
+
+###
+
+### PASSO 2: Cancelar minha reserva
+# Use o ID da reserva
+DELETE http://localhost:8080/api/reservas/1
+
+###
+
+### PASSO 3: Verificar que reserva foi removida
+GET http://localhost:8080/api/reservas/usuario/3
+Accept: application/json
+
+# Deve retornar lista vazia
+
+###
+
+### ========================================
+### TESTES DE VALIDAÇÃO
+### ========================================
+
+### TESTE 1: Tentar criar reserva para usuário inexistente
+POST http://localhost:8080/api/reservas
+Content-Type: application/json
+
+{
+  "usuarioId": 999,
+  "eventoId": 1
+}
+
+# Esperado: 404 Not Found
+
+###
+
+### TESTE 2: Tentar criar reserva para evento inexistente
+POST http://localhost:8080/api/reservas
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "eventoId": 999
+}
+
+# Esperado: 404 Not Found
+
+###
+
+### TESTE 3: Tentar criar reserva duplicada
+POST http://localhost:8080/api/reservas
+Content-Type: application/json
+
+{
+  "usuarioId": 3,
+  "eventoId": 1
+}
+
+# Execute duas vezes - segunda deve retornar: 409 Conflict
+
+###
+
+### TESTE 4: Tentar converter reserva inexistente
+POST http://localhost:8080/api/reservas/999/converter
+Content-Type: application/json
+
+# Esperado: 404 Not Found
+
+###
+
+### TESTE 5: Criar evento no passado e tentar reservar
+POST http://localhost:8080/api/eventos
+Content-Type: application/json
+
+{
+  "nome": "Evento Passado",
+  "descricao": "Teste de validação",
+  "vagas": 10,
+  "dataInicio": "2025-01-01T10:00:00",
+  "dataFim": "2025-01-01T18:00:00"
+}
+
+###
+
+### TESTE 6: Tentar criar reserva para evento passado
+POST http://localhost:8080/api/reservas
+Content-Type: application/json
+
+{
+  "usuarioId": 1,
+  "eventoId": 2
+}
+
+# Esperado: 400 Bad Request - "Não é possível fazer reserva para evento que já começou"
+
+###
+
